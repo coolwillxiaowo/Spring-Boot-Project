@@ -15,13 +15,10 @@ import com.ebay.validshipping.model.SellerRule;
 @Repository
 public class ShippingRuleRepository {
 
-	//private PriceRule priceRule;
-	private CategoryRule categoryRule;
-	private SellerRule sellerRule;
 	
-	private Set<SellerRule> sellerRuleDB = new HashSet<>();
+	private List<SellerRule> sellerRuleDB = new ArrayList<>();
 	private Stack<PriceRule> priceRuleDB = new Stack<>();
-	private Set<CategoryRule> categoryRuleDB = new HashSet<>();
+	private List<CategoryRule> categoryRuleDB = new ArrayList<>();
 
 	public ShippingRuleRepository() {
 		
@@ -33,19 +30,20 @@ public class ShippingRuleRepository {
 	}
 	
 	public List<SellerRule> getSellerRules() {
-		List<SellerRule> list = new ArrayList<>();
-		for (SellerRule sr : sellerRuleDB) {
-			list.add(sr);
-		}
-		return list;
+//		List<SellerRule> list = new ArrayList<>();
+//		for (SellerRule sr : sellerRuleDB) {
+//			//System.out.println(sr);
+//			list.add(sr);
+//		}
+		return this.sellerRuleDB;
 	}
 	
 	public List<CategoryRule> getCategoryRules() {
-		List<CategoryRule> list = new ArrayList<>();
-		for (CategoryRule cr : categoryRuleDB) {
-			list.add(cr);
-		}
-		return list;
+//		List<CategoryRule> list = new ArrayList<>();
+//		for (CategoryRule cr : categoryRuleDB) {
+//			list.add(cr);
+//		}
+		return this.categoryRuleDB;
 	}
 	
 	public List<PriceRule> getPriceRule() {
@@ -56,11 +54,26 @@ public class ShippingRuleRepository {
 	}
 	
 	public void addSellerRule(SellerRule sr) {
-		this.sellerRuleDB.add(sr);
+		boolean flag = false;
+		for (SellerRule s : sellerRuleDB) {
+			if (s.getSellerName().equals(sr.getSellerName())) {
+				flag = true;
+			}
+		}
+		if (flag == false) {
+			this.sellerRuleDB.add(sr);
+		}
+		
+		
 	}
 	
 	public void removeSellerRule(SellerRule sr) {
-		this.sellerRuleDB.remove(sr);
+		
+		for (SellerRule s : sellerRuleDB) {
+			if (s.getSellerName().equals(sr.getSellerName())) {
+				sellerRuleDB.remove(s);
+			}
+		}
 	}
 	
 	public void updatePriceRule(PriceRule pr) {
@@ -70,11 +83,23 @@ public class ShippingRuleRepository {
 	}
 	
 	public void addCategoryRule(CategoryRule cr) {
-		this.categoryRuleDB.add(cr);
+		boolean flag = false;
+		for (CategoryRule c : categoryRuleDB) {
+			if (c.getCategoryNumber() == cr.getCategoryNumber()) {
+				flag = true;
+			}
+		}
+		if (flag == false) {
+			this.categoryRuleDB.add(cr);
+		}
 	}
 	
 	public void removeCategoryRule(CategoryRule cr) {
-		this.categoryRuleDB.remove(cr);
+		for (CategoryRule c : categoryRuleDB) {
+			if (c.getCategoryNumber() == cr.getCategoryNumber()) {
+				categoryRuleDB.remove(c);
+			}
+		}
 	}
 	
 	

@@ -23,6 +23,11 @@ public class CategoryRule implements Rule {
 	public void setCategoryNumber(int categoryNumber) {
 		this.categoryNumber = categoryNumber;
 	}
+
+	@Override
+	public String toString() {
+		return "CategoryRule [categoryNumber=" + categoryNumber + "]";
+	}
 	
 
 }

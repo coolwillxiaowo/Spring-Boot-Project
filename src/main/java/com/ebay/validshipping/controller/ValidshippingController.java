@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +43,20 @@ public class ValidshippingController {
 		}
 		return false;
 	}
-	
+	/*
+	@RequestMapping(value = "/validshipping", method = RequestMethod.GET)
+	public @ResponseBody Boolean isvalid(@PathVariable("title") String title, @PathVariable("seller") String seller,
+			@PathVariable("category") Integer category, @PathVariable("price") double price) {
+		if (title == null) {
+			return false;
+		}
+		if (validateService.checkSeller(seller) && validateService.checkPrice(price)
+				&& validateService.checkCategory(category)) {
+			return true;
+		}
+		return false;
+	}
+	*/
 	@RequestMapping(value = "/seller", method = RequestMethod.GET)
 	public @ResponseBody List<SellerRule> getSellerRule() throws Exception {
 

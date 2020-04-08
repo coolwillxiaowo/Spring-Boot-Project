@@ -24,6 +24,13 @@ public class SellerRule implements Rule {
 	
 		this.sellerName = sellerName;
 	}
+
+	@Override
+	public String toString() {
+		return "SellerRule [sellerName=" + sellerName + "]";
+	}
+	
+	
 	
 	
 
