@@ -30,9 +30,6 @@ public class ValidshippingController {
 	@Autowired
 	UpdateshippingService updateService;
 
-	@Autowired
-	ShippingRuleRepository shippingProgram;
-
 	@RequestMapping(value = "/validshipping", method = RequestMethod.GET)
 	public @ResponseBody Boolean isvalid(@RequestParam("title") String title, @RequestParam("seller") String seller,
 			@RequestParam("category") Integer category, @RequestParam("price") double price) {
@@ -47,73 +44,58 @@ public class ValidshippingController {
 	}
 	
 	@RequestMapping(value = "/seller", method = RequestMethod.GET)
-	public @ResponseBody SellerRule getSellerRule() throws Exception {
+	public @ResponseBody List<SellerRule> getSellerRule() throws Exception {
 
-		System.out.println(shippingProgram.getSellerRule());
-		return shippingProgram.getSellerRule();
+		return updateService.getSellerRule();
 		
 	}
 	
 	@RequestMapping(value = "/category", method = RequestMethod.GET)
-	public @ResponseBody CategoryRule getCategoryRule() throws Exception {
+	public @ResponseBody List<CategoryRule> getCategoryRule() throws Exception {
 
-		System.out.println(shippingProgram.getCategoryRule());
-		return shippingProgram.getCategoryRule();
+		return updateService.getCategoryRule();
 	}
 	
 	@RequestMapping(value = "/price", method = RequestMethod.GET)
-	public @ResponseBody PriceRule getPriceRule() throws Exception {
+	public @ResponseBody List<PriceRule> getPriceRule() throws Exception {
 
-		System.out.println(shippingProgram.getPriceRule());
-		return shippingProgram.getPriceRule();
+		return updateService.getPriceRule();
 	}
 
-	@RequestMapping(value = "/seller", method = RequestMethod.POST, consumes = "text/plain", produces = "application/json")
-	public @ResponseBody SellerRule updateSellerRule(@RequestBody String seller) throws Exception {
+	@RequestMapping(value = "/seller", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public @ResponseBody List<SellerRule> updateSellerRule(@RequestBody SellerRule seller) throws Exception {
 
-		updateService.updateSellerRule(seller);
-		System.out.println(shippingProgram.getSellerRule());
-		return shippingProgram.getSellerRule();
-		// return new ArrayList<String>(shippingProgram.getSellerRule().getSeller());
+		updateService.addSellerRule(seller);
+		return updateService.getSellerRule();
 
 	}
 
-	@RequestMapping(value = "/category", method = RequestMethod.POST, consumes = "text/plain", produces = "application/json")
-	public @ResponseBody CategoryRule updateCategoryRule(@RequestBody String categoryStr) throws Exception {
+	@RequestMapping(value = "/category", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public @ResponseBody List<CategoryRule> updateCategoryRule(@RequestBody CategoryRule category) throws Exception {
 
-		Integer category = Integer.valueOf(categoryStr);
-		updateService.updateCategoryRule(category);
-		System.out.println(shippingProgram.getCategoryRule());
-		return shippingProgram.getCategoryRule();
+		updateService.addCategoryRule(category);
+		return updateService.getCategoryRule();
 	}
 
-	@RequestMapping(value = "/price", method = RequestMethod.PUT, consumes = "text/plain", produces = "application/json")
-	public @ResponseBody PriceRule updatePriceRule(@RequestBody String priceStr) throws Exception {
-		Double price = Double.parseDouble(priceStr);
+	@RequestMapping(value = "/price", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
+	public @ResponseBody List<PriceRule> updatePriceRule(@RequestBody PriceRule price) throws Exception {
+
 		updateService.updatePriceRule(price);
-		System.out.println(shippingProgram.getPriceRule());
-		return shippingProgram.getPriceRule();
+		return updateService.getPriceRule();
 	}
 
-	@RequestMapping(value = "/seller", method = RequestMethod.DELETE, consumes = "text/plain", produces = "application/json")
-	public @ResponseBody SellerRule removeSellerRule(@RequestBody String seller) throws Exception {
+	@RequestMapping(value = "/seller", method = RequestMethod.DELETE, consumes = "application/json", produces = "application/json")
+	public @ResponseBody List<SellerRule> removeSellerRule(@RequestBody SellerRule seller) throws Exception {
 
 		updateService.removeSellerRule(seller);
-		;
-		System.out.println(shippingProgram.getSellerRule());
-		return shippingProgram.getSellerRule();
-		// return new ArrayList<String>(shippingProgram.getSellerRule().getSeller());
-
+		return updateService.getSellerRule();
 	}
 
-	@RequestMapping(value = "/category", method = RequestMethod.DELETE, consumes = "text/plain", produces = "application/json")
-	public @ResponseBody CategoryRule removeCategoryRule(@RequestBody String categoryStr) throws Exception {
+	@RequestMapping(value = "/category", method = RequestMethod.DELETE, consumes = "application/json", produces = "application/json")
+	public @ResponseBody List<CategoryRule> removeCategoryRule(@RequestBody CategoryRule category) throws Exception {
 
-		Integer category = Integer.valueOf(categoryStr);
 		updateService.removeCategoryRule(category);
-		;
-		System.out.println(shippingProgram.getCategoryRule());
-		return shippingProgram.getCategoryRule();
+		return updateService.getCategoryRule();
 	}
 
 }

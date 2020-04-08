@@ -3,6 +3,10 @@ package com.ebay.validshipping.model;
 public class PriceRule implements Rule {
 
 	private double price;
+	
+	public PriceRule() {
+		
+	}
 
 	public PriceRule(double price) {
 

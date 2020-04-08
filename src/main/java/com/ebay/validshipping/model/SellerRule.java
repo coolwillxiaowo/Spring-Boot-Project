@@ -4,31 +4,27 @@ import java.util.List;
 
 public class SellerRule implements Rule {
 
-	private List<String> seller;
 
-	public SellerRule(List<String> seller) {
+	
+	private String sellerName;
 
-		this.seller = seller;
+	public String getSellerName() {
+		return sellerName;
 	}
 
-	public List<String> getSeller() {
-		return seller;
+	public void setSellerName(String sellerName) {
+		this.sellerName = sellerName;
+	}
+	
+	public SellerRule() {
+		
 	}
 
-	public void setSeller(List<String> seller) {
-		this.seller = seller;
+	public SellerRule(String sellerName) {
+	
+		this.sellerName = sellerName;
 	}
-
-	public boolean isValid(String seller) {
-		if (seller.contains(seller)) {
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public String toString() {
-		return "SellerRule [seller=" + seller + "]";
-	}
+	
+	
 
 }

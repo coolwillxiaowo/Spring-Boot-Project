@@ -1,5 +1,7 @@
 package com.ebay.validshipping.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -16,9 +18,11 @@ public class ValidateService {
 	ShippingRuleRepository shippingProgram;
 
 	public boolean checkSeller(String seller) {
-		SellerRule sr = shippingProgram.getSellerRule();
-		if (sr.getSeller().contains(seller)) {
-			return true;
+		List<SellerRule> list = shippingProgram.getSellerRules();
+		for (SellerRule sr : list) {
+			if (sr.getSellerName().equals(seller)) {
+				return true;
+			}
 		}
 		return false;
 		
@@ -26,18 +30,25 @@ public class ValidateService {
 
 	public boolean checkCategory(int category) {
 
-		CategoryRule cr = shippingProgram.getCategoryRule();
-		if (cr.getCategories().contains(category)) {
-			return true;
+		List<CategoryRule> list = shippingProgram.getCategoryRules();
+		for (CategoryRule cr : list) {
+			if (cr.getCategoryNumber() == category) {
+				return true;
+			}
 		}
 		return false;
 
 	
 	}
 
-	public boolean checkPrice(double price) {
-		PriceRule pr = shippingProgram.getPriceRule();
-		return pr.isValid(price);
+	public boolean checkPrice(double pr) {
+		List<PriceRule> list = shippingProgram.getPriceRule();
+		for (PriceRule p : list) {
+			if (p.getPrice() <= pr) {
+				return true;
+			}
+		}
+		return false;
 
 
 	}

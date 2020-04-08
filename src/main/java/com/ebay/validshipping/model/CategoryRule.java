@@ -4,25 +4,25 @@ import java.util.List;
 
 public class CategoryRule implements Rule {
 
-	private List<Integer> categories;
-
-	public CategoryRule(List<Integer> categories) {
-
-		this.categories = categories;
+	
+	private int categoryNumber;
+	
+	public CategoryRule() {
+		
 	}
 
-	public List<Integer> getCategories() {
-		return categories;
+	public CategoryRule(int categoryNumber) {
+
+		this.categoryNumber = categoryNumber;
 	}
 
-	public void setCategories(List<Integer> categories) {
-		this.categories = categories;
+	public int getCategoryNumber() {
+		return categoryNumber;
 	}
 
-
-	@Override
-	public String toString() {
-		return "CategoryRule [categories=" + categories + "]";
+	public void setCategoryNumber(int categoryNumber) {
+		this.categoryNumber = categoryNumber;
 	}
+	
 
 }

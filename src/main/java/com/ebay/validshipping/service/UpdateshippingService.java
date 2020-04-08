@@ -1,6 +1,7 @@
 package com.ebay.validshipping.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,49 +16,48 @@ public class UpdateshippingService {
 
 	@Autowired
 	ShippingRuleRepository shippingProgram;
+	
 
-	public void updatePriceRule(double price) {
+	public void updatePriceRule(PriceRule pr) {
 
-		PriceRule pr = shippingProgram.getPriceRule();
-		pr.setPrice(price);
+		shippingProgram.updatePriceRule(pr);
+
+	}
+	
+	public List<PriceRule> getPriceRule() {
+		return shippingProgram.getPriceRule();
+	}
+
+	public void addSellerRule(SellerRule seller) {
+
+		shippingProgram.addSellerRule(seller);
 
 	}
 
-	public void updateSellerRule(String seller) {
+	public void removeSellerRule(SellerRule seller) {
 
-		SellerRule sr = shippingProgram.getSellerRule();
-		List<String> sellers = sr.getSeller();
-		if (!sellers.contains(seller)) {
-			sellers.add(seller);
-		}
+		shippingProgram.removeSellerRule(seller);
 
 	}
 
-	public void removeSellerRule(String seller) {
-		
-		SellerRule sr = shippingProgram.getSellerRule();
-		List<String> sellers = sr.getSeller();
-		if (sellers.contains(seller)) {
-			sellers.remove(seller);
-		}
+	public List<SellerRule> getSellerRule() {
+		return shippingProgram.getSellerRules();
+	}
+
+	public void addCategoryRule(CategoryRule category) {
+
+		shippingProgram.addCategoryRule(category);
 
 	}
 
-	public void updateCategoryRule(int category) {
-		CategoryRule cr = shippingProgram.getCategoryRule();
-		List<Integer> categories = cr.getCategories();
-		if (!categories.contains(category)) {
-			categories.add(category);
-		}
+	public void removeCategoryRule(CategoryRule category) {
+
+		shippingProgram.removeCategoryRule(category);
 
 	}
 
-	public void removeCategoryRule(Integer category) {
-		CategoryRule cr = shippingProgram.getCategoryRule();
-		List<Integer> categories = cr.getCategories();
-		if (categories.contains(category)) {
-			categories.remove(category);
-		}
+	public List<CategoryRule> getCategoryRule() {
+		return shippingProgram.getCategoryRules();
 	}
 
 }
