@@ -25,7 +25,58 @@ Second Functionality is exposing configurable items (Shipping Rules) through som
 
 After the project is finised, I implemented Junit test and Mokito to test the service layer and the Spring Rest Controller and passed all the test cases I implemented.
 
+Unit Test with JUnit:
+
+```
+open the Unit Test cases, and run as jUnit Test 
+```
+
+
+
 After that, I used Postman to test the REST API and double checked the API and passin the Json object and check the validity of the JSON object I received.
+
+Testing the REST API functionality with Postman:
+
+```
+1. Lunch the Spring boot project and open Postman
+1. Testing the valid shipping rules by using the default value I give, for example: GET: localhost:8080/api/validshipping/?title=hi&seller=Walmart&category=1&price=1000
+And this should received a response with message true
+
+2. Show/Add/Remove seller from the preapproved list:
+GET: localhost:8080/api/seller
+POST: localhost:8080/api/seller
+DELETE: localhost:8080/api/seller
+For POST and DELETE request, passing Json Object in the body, for example : 
+{
+	"sellerName" : "Sams"
+}
+and set Content-Type in the headers as application/json
+
+3. Show/Add/Remove category from the preapproved list:
+GET: localhost:8080/api/category
+POST: localhost:8080/api/category
+DELETE: localhost:8080/api/category
+For POST and DELETE request, passing Json Object in the body, for example : 
+{
+	"categoryNumber" : 2
+}
+and set Content-Type in the headers as application/json
+
+4. Show/Update the minium price rule from the preapproved list:
+GET: localhost:8080/api/price
+PUT: localhost:8080/api/category
+
+For PUT request, passing Json Object in the body, for example : 
+{
+	"price" : 10.1
+}
+and set Content-Type in the headers as application/json
+
+5. Testing the valid shipping rules by using the value you have passed in, for example: GET: localhost:8080/api/validshipping/?title=hi&seller=Sams&category=2&price=10.2
+
+```
+
+
 
 ## Documentation
 
